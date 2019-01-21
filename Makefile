@@ -30,3 +30,7 @@ makemigrations:
 createsuperuser:
 	@echo $(TAG)Create Superuser$(END)
 	$(call django-command, createsuperuser)
+
+startapp:
+	@echo $(TAG)Create App$(END)
+	$(call django-command, startapp, $(app))
