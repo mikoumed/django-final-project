@@ -1,10 +1,11 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.shortcuts import render, redirect
+# from django.contrib.auth.forms import UserCreationForm
+# from django.shortcuts import render, redirect
 from users.forms import SignUpForm
-from django.contrib.auth import authenticate, login
+# from django.contrib.auth import authenticate, login
 from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
+
 
 # @csrf_exempt
 # def signup(request):
@@ -24,5 +25,5 @@ from django.urls import reverse_lazy
 
 class SignUp(CreateView):
     form_class = SignUpForm
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('index')
     template_name = 'registration/signup.html'

@@ -11,7 +11,6 @@ class IndexPageView(TemplateView):
         if self.request.user.is_authenticated:
             categories = self.request.user.categories
             languages = self.request.user.languages
-            countries = self.request.user.countries
 
         #
         # for category in categories:

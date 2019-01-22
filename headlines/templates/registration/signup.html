@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
-
+{% load staticfiles%}
 {% block title %}Sign up{% endblock %}
+
+{% block stylesheet %}<link rel="stylesheet" href="{% static 'css/users.css' %}">{% endblock %}
+
 
 {% block content %}
   <div class="row justify-content-center">
