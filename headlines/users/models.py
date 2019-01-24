@@ -1,22 +1,25 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-CHOICES = (
-    ('A', 'A'),
-    ('B', 'B'),
-)
+
+class Category(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.name
+
+
+class Language(models.Model):
+    name = models.CharField(max_length=50)
+
+    def __str__(self):
+            return self.name
+
 
 class User(AbstractUser):
-    password1 = models.CharField(max_length=50)
-    categories = models.CharField(choices=CHOICES, max_length=20, null=True, blank=True)
-    languages = models.CharField(choices=CHOICES, max_length=20,null=True, blank=True)
+
+    categories = models.ManyToManyField(Category)
+    languages = models.ManyToManyField(Language)
 
     def __str__(self):
         return self.username
-
-# class Category(models.Model):
-#     name = models.CharField(max_length=50)
-#
-#
-# class Language(models.Model):
-#     name = models.CharField(max_length=50)

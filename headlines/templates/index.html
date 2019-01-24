@@ -5,6 +5,7 @@
 {% block content %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
+  {{ count }}
   <a href="{% url 'logout' %}">logout</a>
 {% else %}
   <p>You are not logged in</p>
