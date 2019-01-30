@@ -37,6 +37,6 @@ class SignUp(FormView):
         )
 
         user.categories.set(form.cleaned_data['categories'])
-        user.languages.set(form.cleaned_data['languages'])
+        user.countries.set(form.cleaned_data['countries'])
 
         return super(SignUp, self).form_valid(form)

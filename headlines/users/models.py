@@ -3,14 +3,14 @@ from django.contrib.auth.models import AbstractUser
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
 
 
-class Language(models.Model):
-    name = models.CharField(max_length=50)
+class Country(models.Model):
+    name = models.CharField(max_length=50, unique=True)
 
     def __str__(self):
             return self.name
@@ -19,7 +19,7 @@ class Language(models.Model):
 class User(AbstractUser):
 
     categories = models.ManyToManyField(Category)
-    languages = models.ManyToManyField(Language)
+    countries = models.ManyToManyField(Country)
 
     def __str__(self):
         return self.username

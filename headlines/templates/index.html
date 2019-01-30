@@ -8,28 +8,28 @@
 
 {% block content %}
 {% if user.is_authenticated %}
-{% for language, categories in payload.items %}
+{% for country, categories in payload.items %}
 <div id="accordion">
   <div class="card">
         <div class="card-header" id="headingOne">
               <h5 class="mb-0">
-                <button class="btn btn-link" data-toggle="collapse" data-target='#{{ language }}' aria-expanded="true" aria-controls='{{ language }}'>
-                  {{ language }}
+                <button class="btn btn-link" data-toggle="collapse" data-target='#{{ country }}' aria-expanded="true" aria-controls='{{ country }}'>
+                  {{ country }}
                 </button>
               </h5>
         </div>
 
-        <div id='{{ language }}' class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+        <div id='{{ country }}' class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
           <div class="card-body">
               {% for category, articles_list in categories.items %}
               <div class="card-header" id="headingTwo">
                   <h5 class="mb-0">
-                    <button class="btn btn-link" data-toggle="collapse" data-target='#{{ language }}{{ category }}' aria-expanded="true" aria-controls='{{ language }}{{ category }}'>
+                    <button class="btn btn-link" data-toggle="collapse" data-target='#{{ country }}{{ category }}' aria-expanded="true" aria-controls='{{ country }}{{ category }}'>
                       {{ category }}
                     </button>
                   </h5>
               </div>
-              <div id='{{ language }}{{ category }}' class="collapse show" aria-labelledby="headingTwo" data-parent="#{{ language }}{{ category }}">
+              <div id='{{ country }}{{ category }}' class="collapse show" aria-labelledby="headingTwo" data-parent="#{{ country }}{{ category }}">
           	  <div class="card-body">
           		  <table class="table">
           			<thead class="thead-inverse">
