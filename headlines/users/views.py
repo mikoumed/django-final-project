@@ -1,11 +1,45 @@
 from django.views.generic.edit import FormView
-# from django.shortcuts import render, redirect
 from users.forms import SignUpForm
-# from django.contrib.auth import authenticate, login
-from django.views.decorators.csrf import csrf_exempt
 from django.views.generic import CreateView
 from django.urls import reverse_lazy
 from .models import User
+from django.http import HttpResponseRedirect
+# from django.views.decorators.csrf import csrf_exempt
+# from django.shortcuts import render, redirect
+# from django.contrib.auth import authenticate, login
+
+
+class SignUp(FormView):
+    redirect_authenticated_user = False
+    form_class = SignUpForm
+    success_url = reverse_lazy('index')
+    template_name = 'registration/signup.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        if self.redirect_authenticated_user and self.request.user.is_authenticated:
+            redirect_to = self.get_success_url()
+            if redirect_to == self.request.path:
+                raise ValueError(
+                    "Redirection loop for authenticated user detected. Check that "
+                    "your LOGIN_REDIRECT_URL doesn't point to a login page."
+                )
+            return HttpResponseRedirect(redirect_to)
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        user = User.objects.create_user(
+            username = form.cleaned_data['username'],
+            email = form.cleaned_data['email'],
+            password = form.cleaned_data['password1']
+        )
+
+        user.categories.set(form.cleaned_data['categories'])
+        user.countries.set(form.cleaned_data['countries'])
+
+        return super(SignUp, self).form_valid(form)
+
+
+
 
 
 # @csrf_exempt
@@ -22,21 +56,3 @@ from .models import User
 #     else:
 #         form = SignUpForm()
 #     return render(request, 'registration/signup.html', {'form': form})
-
-
-class SignUp(FormView):
-    form_class = SignUpForm
-    success_url = reverse_lazy('index')
-    template_name = 'registration/signup.html'
-
-    def form_valid(self, form):
-        user = User.objects.create_user(
-            username = form.cleaned_data['username'],
-            email = form.cleaned_data['email'],
-            password = form.cleaned_data['password1']
-        )
-
-        user.categories.set(form.cleaned_data['categories'])
-        user.countries.set(form.cleaned_data['countries'])
-
-        return super(SignUp, self).form_valid(form)
