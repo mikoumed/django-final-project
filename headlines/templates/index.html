@@ -42,9 +42,9 @@
           			<tbody>
           			  {% for article in articles_list %}
           				<tr>
-          				  <td class="align-middle">{{ article.title }}>
+          				  <td class="align-middle">{{ article.title }}</td>
           				  <td class="align-middle">{{ article.source.name }}</td>
-          				  <td class="align-middle">{{ article.content }}</td>
+          				  <td class="align-middle">{{ article.content }} <a target="_blank" href="{{ article.url }}">read more</a></td>
           				  <td></td>
           				</tr>
           			  {% endfor %}

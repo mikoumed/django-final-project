@@ -17,6 +17,24 @@ COUNTRIES = {
 class IndexPageView(TemplateView, LoginRequiredMixin):
     template_name = 'index.html'
     news_api_key = 'd380b7d83c074b4e8b710d302cc53601'
+
+    def formatted_response(self, articles):
+        result = []
+        for article in articles:
+            a_dict = {}
+            new_value = ''
+            for key, value in article.items():
+                if key == 'content' and value:
+                    if '[' in value:
+                        new_value = value[:value.index('[')]
+                        a_dict[key] = new_value
+                    else:
+                        a_dict[key] = value
+                if key in ['url','source','title']:
+                    a_dict[key] = value
+            result.append(a_dict)
+        return result
+
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
@@ -35,7 +53,7 @@ class IndexPageView(TemplateView, LoginRequiredMixin):
                             return e
 
                         results[country.name].setdefault(category.name,[])
-                        results[country.name][category.name] = response['articles']
+                        results[country.name][category.name] = self.formatted_response(response['articles'])
                 context['payload'] = results
                 self.request.session['last_result'] = results
                 self.request.session['last_time'] = datetime.now().strftime('%H%M%S')
