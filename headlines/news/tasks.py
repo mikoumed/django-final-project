@@ -12,6 +12,23 @@ COUNTRIES = {
     'Germany' : 'de'
 }
 
+def formatted_response(articles):
+    result = []
+    for article in articles:
+        a_dict = {}
+        new_value = ''
+        for key, value in article.items():
+            if key == 'content' and value:
+                if '[' in value:
+                    new_value = value[:value.index('[')]
+                    a_dict[key] = new_value
+                else:
+                    a_dict[key] = value
+            if key in ['url','source','title']:
+                a_dict[key] = value
+        result.append(a_dict)
+    return result
+
 def get_response(user):
     results = {}
     connect_timeout, read_timeout = 5.0, 30.0
@@ -28,7 +45,7 @@ def get_response(user):
                 return e
 
             results[country.name].setdefault(category.name,[])
-            results[country.name][category.name] = response['articles']
+            results[country.name][category.name] = formatted_response(response['articles'])
     return results
 
 @shared_task

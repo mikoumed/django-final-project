@@ -10,7 +10,6 @@ import requests
 
 class IndexPageView(TemplateView, LoginRequiredMixin):
     template_name = 'index.html'
-    news_api_key = 'd380b7d83c074b4e8b710d302cc53601'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
