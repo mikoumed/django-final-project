@@ -3,3 +3,5 @@ django==2.1.5
 pytest==4.1.0
 django-widget-tweaks==1.4.3
 djangorestframework==3.9.1
+celery[redis]==4.2.0
+django-redis==4.10.0
