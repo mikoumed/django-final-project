@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'users',
     'news',
     'widget_tweaks',
+    'django_celery_beat',
 ]
 
 MIDDLEWARE = [
@@ -158,3 +159,13 @@ CACHES = {
         }
     }
 }
+
+# CELERY BEAT SCHEDULER
+CELERY_BEAT_SCHEDULE = {
+    'request_api_every_15_min': {
+        'task': 'tasks.request_api',
+        'schedule': 900.0,
+    },
+}
+
+CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
