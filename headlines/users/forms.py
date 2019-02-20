@@ -6,7 +6,7 @@ from crispy_forms.layout import Layout, Field
 from django.forms import ModelForm
 
 
-class SignUpForm(UserCreationForm, forms.ModelForm):
+class SignUpForm(UserCreationForm):
 
     categories = forms.ModelMultipleChoiceField(queryset=Category.objects.all(), widget=forms.CheckboxSelectMultiple(), required=True)
     countries = forms.ModelMultipleChoiceField(queryset=Country.objects.all(), widget=forms.CheckboxSelectMultiple(), required=True)
@@ -19,3 +19,7 @@ class SignUpForm(UserCreationForm, forms.ModelForm):
     #     for field_name in self.fields:
     #         if field_name in ['categories', 'countries']:
     #             yield self[field_name]
+class UpdateProfileForm(SignUpForm):
+    class Meta:
+        model = User
+        fields = ['categories', 'countries']

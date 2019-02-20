@@ -1,9 +1,10 @@
 from django.views.generic.edit import FormView
-from users.forms import SignUpForm
-from django.views.generic import CreateView
+from users.forms import SignUpForm, UpdateProfileForm
+from django.views.generic import CreateView, UpdateView
 from django.urls import reverse_lazy
 from .models import User
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 # from django.views.decorators.csrf import csrf_exempt
 # from django.shortcuts import render, redirect
 # from django.contrib.auth import authenticate, login
@@ -38,6 +39,24 @@ class SignUp(FormView):
 
         return super(SignUp, self).form_valid(form)
 
+class UpdateProfile(UpdateView):
+    redirect_authenticated_user = False
+    model = User
+    form_class = UpdateProfileForm
+    template_name = 'registration/signup.html'
+    success_url = reverse_lazy('login')
+
+    def get_object(self):
+        return get_object_or_404(User, pk=self.kwargs['user_id'])
+
+
+
+    def form_valid(self, form):
+        user = User.objects.get(id=self.kwargs['user_id'])
+        user.categories.set(form.cleaned_data['categories'])
+        user.countries.set(form.cleaned_data['countries'])
+
+        return super(UpdateProfile, self).form_valid(form)
 
 
 
