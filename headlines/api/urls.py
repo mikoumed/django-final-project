@@ -3,9 +3,8 @@ from . import views
 from rest_framework.routers import DefaultRouter
 from rest_framework_swagger.views import get_swagger_view
 
-schema_view = get_swagger_view(title='Users API')
-schema_view = get_swagger_view(title='Categories API')
-schema_view = get_swagger_view(title='Countries API')
+schema_view = get_swagger_view(title='Headlines API')
+
 
 router = DefaultRouter()
 
