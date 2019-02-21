@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'news',
     'widget_tweaks',
     'django_celery_beat',
+    'rest_framework_swagger',
 ]
 
 MIDDLEWARE = [

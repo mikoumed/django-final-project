@@ -1,7 +1,11 @@
 from django.urls import path
 from . import views
 from rest_framework.routers import DefaultRouter
+from rest_framework_swagger.views import get_swagger_view
 
+schema_view = get_swagger_view(title='Users API')
+schema_view = get_swagger_view(title='Categories API')
+schema_view = get_swagger_view(title='Countries API')
 
 router = DefaultRouter()
 
@@ -11,6 +15,7 @@ router.register('categories', views.CategoryModelViewSet, base_name='categories'
 router.register('countries', views.CountryModelViewset, base_name='countries')
 
 urlpatterns = [
+    path(r'docs/', schema_view),
     # path('list/', views.UserList.as_view(), name='users_list'),
     # path('json', views.json_response, name='json_response')
     ]
