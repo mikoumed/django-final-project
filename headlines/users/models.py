@@ -25,9 +25,10 @@ class Country(models.Model):
 
 
 class User(AbstractUser):
-
+    
     categories = models.ManyToManyField(Category)
     countries = models.ManyToManyField(Country)
+
 
     def __str__(self):
         return self.username

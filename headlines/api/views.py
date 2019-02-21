@@ -1,11 +1,24 @@
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .serializers import UserSerializer, UserModelSerializer
+# from rest_framework.views import APIView
+# from rest_framework.response import Response
+# from rest_framework import status
+# from rest_framework import mixins #viewsets
+from .serializers import  UserModelSerializer, CategoryModelSerializer, CountryModelSerializer #UserSerializer
 from users.models import User, Category, Country
-from rest_framework import viewsets, mixins
-from rest_framework.viewsets import GenericViewSet
+from rest_framework.viewsets import ModelViewSet
+from rest_framework import status
 
+
+class UserModelViewSet(ModelViewSet):
+    serializer_class = UserModelSerializer
+    queryset = User.objects.all()
+
+class CategoryModelViewSet(ModelViewSet):
+    serializer_class = CategoryModelSerializer
+    queryset = Category.objects.all()
+
+class CountryModelViewset(ModelViewSet):
+    serializer_class = CountryModelSerializer
+    queryset = Country.objects.all()
 
 
 
@@ -27,10 +40,3 @@ from rest_framework.viewsets import GenericViewSet
 #
 #             return Response(status=status.HTTP_201_CREATED)
 #         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-class UserModelViewSet(mixins.CreateModelMixin,
-                        mixins.ListModelMixin,
-                        GenericViewSet):
-
-    serializer_class = UserModelSerializer
-    queryset = User.objects.all()

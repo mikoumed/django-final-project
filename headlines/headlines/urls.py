@@ -23,5 +23,5 @@ urlpatterns = [
     path('', include('django.contrib.auth.urls')), #login logout
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('', include('news.urls')), # news
-    path('json/', include('api.urls')),
+    path('api/', include('api.urls')),
 ]
