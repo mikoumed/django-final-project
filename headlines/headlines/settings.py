@@ -41,7 +41,9 @@ INSTALLED_APPS = [
     'news',
     'widget_tweaks',
     'django_celery_beat',
+    'rest_framework',
     'rest_framework_swagger',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -170,3 +172,14 @@ CELERY_BEAT_SCHEDULE = {
 }
 
 CELERYBEAT_SCHEDULER = 'django_celery_beat.schedulers.DatabaseScheduler'
+
+#API Authentication
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    )
+}
