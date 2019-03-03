@@ -23,7 +23,7 @@ CELERY_TIMEZONE = 'Africa/Casablanca'
 CELERY_RESULT_BACKEND = os.environ['REDIS_URL']
 CELERY_TASK_IGNORE_RESULT= -1
 
-redis_url = urlparse.urlparse(os.environ.get('REDIS_URL'))
+redis_url = urlparse(os.environ.get('REDIS_URL'))
 
 # REDIS CACHE settings
 # CACHES = {
