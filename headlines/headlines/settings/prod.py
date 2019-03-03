@@ -1,6 +1,6 @@
 import os
 import dj_database_url
-import urlparse
+from urllib.parse import urlparse
 from .base import *
 
 SECRET_KEY = os.getenv(
