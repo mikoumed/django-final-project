@@ -16,7 +16,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # CELERY/REDIS settings
 BROKER_URL = os.environ['REDIS_URL']
-# BROKER_VHOST = '0'
+BROKER_VHOST = '0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
