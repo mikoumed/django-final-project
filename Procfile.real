@@ -1,3 +1,1 @@
 web: gunicorn headlines.wsgi --preload
-worker: celery -A headlines worker
-beat: celery -A headlines beat
