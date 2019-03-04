@@ -26,8 +26,6 @@ CELERY_TASK_IGNORE_RESULT= -1
 
 redis_url = urlparse(os.environ.get('REDIS_URL'))
 
-# worker: celery -A headlines worker
-# beat: celery -A headlines beat
 
 # REDIS CACHE settings
 # CACHES = {
