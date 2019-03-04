@@ -1,3 +1,3 @@
 web: gunicorn headlines.wsgi
-worker: celery -A headlines worker
+worker: celery -A headlines worker -El debug
 beat: celery -A headlines beat
