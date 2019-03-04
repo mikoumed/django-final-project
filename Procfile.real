@@ -1,0 +1,3 @@
+web: gunicorn headlines.wsgi --log-file -
+worker: celery -A headlines worker -events --loglevel=info
+beat: celery -A headlines beat --loglevel=info

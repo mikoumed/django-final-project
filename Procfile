@@ -1,3 +1,1 @@
-web: gunicorn headlines.wsgi
-worker: celery -A headlines worker -events -loglevel info
-beat: celery -A headlines beat
+web: env > .env; env PYTHONUNBUFFERED=true honcho start -f Procfile.real 2>&1
