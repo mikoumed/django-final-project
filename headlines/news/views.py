@@ -4,6 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
 from pprint import pprint
 import requests
+from tasks import get_response
 # from django.shortcuts import render
 # from django.http import JsonResponse
 
@@ -15,7 +16,10 @@ class IndexPageView(TemplateView, LoginRequiredMixin):
         context = super().get_context_data(**kwargs)
 
         if self.request.user.is_authenticated:
-            result = cache.get(self.request.user.id)
+            if self.request.user.id in cache:
+                result = cache.get(self.request.user.id)
+            else:
+                result = get_response(self.request.user)
             context['payload'] = result
             return context
 
