@@ -4,7 +4,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.cache import cache
 from pprint import pprint
 import requests
-from tasks import get_response
+from news.tasks import get_response
 # from django.shortcuts import render
 # from django.http import JsonResponse
 
