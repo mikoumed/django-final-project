@@ -5,7 +5,7 @@
 from .serializers import  UserModelSerializer, CategoryModelSerializer, CountryModelSerializer #UserSerializer
 from users.models import User, Category, Country
 from rest_framework.viewsets import ModelViewSet
-from rest_framework import status
+
 
 
 class UserModelViewSet(ModelViewSet):
