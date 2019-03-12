@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users',
     'news',
+    'api',
     'widget_tweaks',
     'django_celery_beat',
     'rest_framework',
@@ -145,18 +146,6 @@ STATICFILES_DIRS = (
 
 
 AUTH_USER_MODEL = 'users.User'
-
-#API Authentication
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES': (
-        'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
-        'rest_framework.authentication.BasicAuthentication',
-    ),
-    'DEFAULT_PERMISSION_CLASSES': (
-        'rest_framework.permissions.IsAuthenticated',
-    )
-}
 
 
 # SWAGGER_SETTINGS = {

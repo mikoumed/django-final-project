@@ -34,12 +34,14 @@ class UserModelSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         password = validated_data.pop('password', None)
+        categories = validated_data.pop('categories', [])
+        countries = validated_data.pop('countries', [])
         instance = self.Meta.model(**validated_data)
         if password is not None:
             instance.set_password(password)
-        instance.categories.set(validated_data['categories'])
-        instance.countries.set(validated_data['countries'])
         instance.save()
+        instance.categories.set(categories)
+        instance.countries.set(countries)
         return instance
 
     def update(self, instance, validated_data):
